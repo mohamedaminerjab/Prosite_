@@ -58,7 +58,7 @@ voyageur * charger_donnees_sans_nbVoyageurs (char nomFich[], int * n)
 
     if(fichier==NULL)
     {
-        printf("erreur");
+        printf("erreur: fichier n'exsite pas \n");
     }
     else{
             *n = 0;

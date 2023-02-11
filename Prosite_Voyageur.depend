@@ -1,0 +1,14 @@
+# depslib dependency file v1.0
+1676135801 source:c:\users\bouthaina\desktop\prosite_voyageur\voyageur.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"voyageur.h"
+
+1676133108 c:\users\bouthaina\desktop\prosite_voyageur\voyageur.h
+
+1676135966 source:c:\users\bouthaina\desktop\prosite_voyageur\main.c
+	<stdio.h>
+	<stdlib.h>
+	"voyageur.h"
+
