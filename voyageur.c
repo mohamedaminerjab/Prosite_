@@ -15,16 +15,19 @@ int nbVoyageurs(char nomFich[])
    fclose(fichier);
    return nb;
 }
-void saisirVoyageur (voyageur * ptv)
+void saisirVoyageur (voyageur* ptv)
 {
+
     printf("donner l identifiant: ");
-    scanf("%s",(*ptv).id);
-     printf("donner le nom: ");
-    scanf("%s",(*ptv).nom);
-     printf("donner adresse: ");
-    scanf("%s",(*ptv).adresse);
-     printf("donner nombre total des voyages : ");
-    scanf("%d",&(*ptv).nbt_voyage);
+    //scanf("%s %s %s %d",ptv->id,ptv->nom,ptv->adresse,&(ptv->nbt_voyage));
+    scanf("%s",ptv->id);
+    printf("donner le nom: ");
+    scanf("%s",ptv->nom);
+    printf("donner adresse: ");
+    scanf("%s",ptv->adresse);
+    printf("donner nombre total des voyages : ");
+    scanf(" %d",&(ptv->nbt_voyage));
+
 }
 // Remarque: Implémentez cette fonction avec 2 façons.(avec et sans l'appel de nbVoyageurs
 voyageur * charger_donnees_avec_nbVoyageurs (char nomFich[], int * n)
@@ -55,7 +58,7 @@ voyageur * charger_donnees_sans_nbVoyageurs (char nomFich[], int * n)
 {
      voyageur *ptr_v;
     FILE*fichier=fopen(nomFich,"rb");
-
+    printf("charger_donnees_sans_nbVoyageurs\n");
     if(fichier==NULL)
     {
         printf("erreur: fichier n'exsite pas \n");
@@ -80,9 +83,10 @@ voyageur * charger_donnees_sans_nbVoyageurs (char nomFich[], int * n)
 }
    }
 
-   (*n)--;
+   printf(" n after chargement %d \n",*n);
+   //(*n)--;
     }
-
+printf("after chargement %d \n",*n);
     return ptr_v;
 }
 void sauvegarder_donnees (char nomFich[], voyageur * tab, int n)
@@ -103,7 +107,7 @@ int trouver(voyageur * tab, char id[], int n)
     int i;
     for(i=0;i<n;i++)
     {
-        if(strcmp(id,(char *)(tab+i)->id==0))
+        if(strcmp(id,(tab+i)->id)==0)
            {
                indice=i;
                break;
@@ -114,20 +118,33 @@ int trouver(voyageur * tab, char id[], int n)
 }
  voyageur * ajouter (voyageur v, voyageur * tab, int * n)
  {
+     printf(" n %d\n",*n);
+     if((*n)==0){
+        tab=(voyageur*)malloc(sizeof(voyageur));
+        (*n)++;
+        *tab=v;
+
+     }
+     else{
      int indice = trouver(tab, v.id, *n);
      if(indice==-1){
             (*n)++;
             /// ici
-            tab=realloc(tab,(*n)*sizeof(voyageur));
-     *(tab+*n)=v;
+            tab= realloc(tab,(*n)*sizeof(voyageur));
+            if(tab==NULL){
+
+            }
+     *(tab+(*n-1)) = v;
 
      }else{
          ((tab+indice)->nbt_voyage)++;
-
-
      }
+ }
+
 return tab;
  }
+
+
 
 // qui permet de supprimer le voyageur dont l’identifiant est passé en paramètre.
 void  supprimer (voyageur * tab , char id[], int * n)
@@ -165,4 +182,16 @@ void liberer (voyageur * tab)
 {
     if(tab!=NULL)
         free(tab);
+}
+
+void afficher_voyageurs(voyageur* tab,int n){
+
+    printf("\nafficher_voyageurs\n");
+    int i=0;
+    for(i=0;i<n;i++){
+            printf("Id %s\n",(tab+i)->id);
+            printf("Nom %s\n",(tab+i)->nom);
+            printf("Adresse %s\n",(tab+i)->adresse);
+            printf("Nombre voyageurs %d\n",(tab+i)->nbt_voyage);
+    }
 }

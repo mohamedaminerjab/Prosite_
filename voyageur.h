@@ -19,6 +19,7 @@ void  supprimer (voyageur * tab , char id[], int * n);
 
 void liberer (voyageur * tab);
 
+void afficher_voyageurs(voyageur* tab, int n);
 
 
 #endif // VOYAGEUR_H_INCLUDED
